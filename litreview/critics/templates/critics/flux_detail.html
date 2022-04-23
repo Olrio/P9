@@ -1,0 +1,9 @@
+{% extends 'critics/base_connected.html' %}
+
+{% block content %}
+<h2>Post : {{ ticket.title }}</h2>
+<p>description :{{ ticket.description }}</p>
+<p>utilisateur : {{ ticket.user }}</p>
+<p>image : {{ ticket.image }}</p>
+<p>créé le : {{ ticket.time_created }}</p>
+{% endblock %}

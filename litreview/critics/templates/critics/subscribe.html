@@ -1,0 +1,16 @@
+{% extends 'critics/base_connected.html' %}
+
+{% block content %}
+
+<h1>Suivre d'autres utilisateurs</h1>
+<input type="text" name="username" id="username" placeholder="Nom d'utilisateur"><br><br>
+<button><a href="../subscribe">Envoyer</a></button>
+<h1>Abonnements</h1>
+<span>user1</span><button><a href="../subscribe">Désabonner</a></button><br>
+<span>user2</span><button><a href="../subscribe">Désabonner</a></button><br>
+<span>user3</span><button><a href="../subscribe">Désabonner</a></button><br>
+<h1>Abonnés</h1>
+<span>userA</span><br>
+<span>userB</span><br>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'critics/base_connected.html' %}
+
+{% block content %}
+
+
+        <button><a href="../ticket">Demander une critique</a></button>
+        <br><br>
+        <button><a href="../create_critic">Créer une critique</a></button>
+        <p>Liste des tickets : </p>
+                    <ul>
+                        {% for ticket in tickets %}
+                            {% if ticket.title.0 < "E" %}
+                                <li>{{ ticket.title }} <button><a href="../answer_critic?demand={{ticket.title}}">Créer une critique</a></button></li>
+                            {% else %}
+                                <li>{{ ticket.title }} <button><a href="../answer_critic?demand={{ticket.title}}">Créer une critique</a></button></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+
+{% endblock %}

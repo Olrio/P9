@@ -1,0 +1,15 @@
+{% extends 'critics/base_connected.html' %}
+
+{% block content %}
+
+<h1>Voir vos propres posts</h1>
+<p>post1</p>
+<button><a href="../modify_critic?demand={post1}">Modifier (critique)</a></button>
+<button><a href="../modify_ticket?demand={post1}">Modifier (ticket)</a></button>
+<button><a href="../posts">Supprimer</a></button>
+<p>post2</p>
+<button><a href="../modify_critic?demand={post2}">Modifier (critique)</a></button>
+<button><a href="../modify_ticket?demand={post2}">Modifier (ticket)</a></button>
+<button><a href="../posts">Supprimer</a></button>
+
+{% endblock %}
