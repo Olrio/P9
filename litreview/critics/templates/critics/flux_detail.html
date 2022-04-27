@@ -6,4 +6,6 @@
 <p>utilisateur : {{ ticket.user }}</p>
 <p>image : {{ ticket.image }}</p>
 <p>créé le : {{ ticket.time_created }}</p>
+
+<a href="{% url 'flux' %}">Revenir au flux</a>
 {% endblock %}
