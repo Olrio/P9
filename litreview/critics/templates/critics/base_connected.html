@@ -1,4 +1,4 @@
-{% extends 'critics/base.html' %}
+{% extends 'base.html' %}
 
 {% block nav %}
 
@@ -7,7 +7,11 @@
         <a href="/flux">Flux</a>
         <a href="/posts">Posts</a>
         <a href="/subscribe">Abonnements</a>
-        <a href="/login">Se déconnecter</a>
+        {% if user.is_authenticated %}
+        <p>Vous êtes connecté en tant que : {{ request.user }}
+        <a href="{% url 'logout' %}">Se déconnecter</a></p>
+        {% endif %}
+
         <br><br>
     </nav>
 </header>

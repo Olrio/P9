@@ -15,20 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from critics import views
+import critics.views
+import authentication.views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', views.login),
-    path('register/', views.register),
-    path('flux/', views.flux, name='flux'),
-    path('flux/<int:id>/', views.flux_detail, name='flux-detail'),
-    path('subscribe/', views.subscribe),
-    path('ticket/create/', views.ticket_create, name='ticket-create'),
-    path('ticket/<int:id>/change/', views.ticket_update, name='ticket-update'),
-    path('ticket/<int:id>/delete/', views.ticket_delete, name='ticket-delete'),
-    path('create_critic/', views.create_critic),
-    path('answer_critic/', views.answer_critic),
-    path('posts/', views.posts, name='posts'),
-    path('modify_critic/', views.modify_critic),
+    path('', authentication.views.login_page, name='login'),
+    path('logout/', authentication.views.logout_user, name='logout'),
+    path('register/', critics.views.register),
+    path('flux/', critics.views.flux, name='flux'),
+    path('flux/<int:id>/', critics.views.flux_detail, name='flux-detail'),
+    path('subscribe/', critics.views.subscribe),
+    path('ticket/create/', critics.views.ticket_create, name='ticket-create'),
+    path('ticket/<int:id>/change/', critics.views.ticket_update, name='ticket-update'),
+    path('ticket/<int:id>/delete/', critics.views.ticket_delete, name='ticket-delete'),
+    path('create_critic/', critics.views.create_critic),
+    path('answer_critic/', critics.views.answer_critic),
+    path('posts/', critics.views.posts, name='posts'),
+    path('modify_critic/', critics.views.modify_critic),
 ]
