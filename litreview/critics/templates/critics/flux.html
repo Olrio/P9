@@ -9,7 +9,9 @@
         <p>Liste des tickets : </p>
                     <ul>
                         {% for ticket in tickets %}
+                            {% if ticket.user == request.user  %}
                             <li><a href="{% url 'flux-detail' ticket.id %}">{{ ticket.title }}</a> <button><a href="../answer_critic?demand={{ticket.title}}">Créer une critique</a></button></li>
+                            {% endif %}
                         {% endfor %}
                     </ul>
 
