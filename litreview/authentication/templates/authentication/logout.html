@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>Vous êtes déconnecté</p>
+<form action="{% url 'login' %}" method="get">
+    <button type="submit">Se reconnecter</button>
+</form>
+
+{% endblock content %}

@@ -15,14 +15,30 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
 import critics.views
 import authentication.views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', authentication.views.login_page, name='login'),
-    path('logout/', authentication.views.logout_user, name='logout'),
+    path('', LoginView.as_view(
+        template_name='authentication/login.html',
+        redirect_authenticated_user=True
+    ), name='login'),
+    path('logout/', LogoutView.as_view(
+        template_name='authentication/logout.html'
+    ), name='logout'),
+    path('password_change/', PasswordChangeView.as_view(
+        template_name='authentication/password_change.html',
+        success_url='../password_change_done/'
+    ), name='new_password'),
+    path('password_change_done/', PasswordChangeDoneView.as_view(
+        template_name='authentication/password_change_done.html'
+    ),
+         name='password_changed'),
+    # path('', authentication.views.login_page, name='login'),
+    # path('logout/', authentication.views.logout_user, name='logout'),
     path('register/', critics.views.register),
     path('flux/', critics.views.flux, name='flux'),
     path('flux/<int:id>/', critics.views.flux_detail, name='flux-detail'),
