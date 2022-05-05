@@ -1,12 +1,9 @@
 from django.http import HttpResponse
+from django.views.generic import View
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from critics.models import Ticket
 from critics.forms import TicketForm
-
-
-def register(request):
-    return render(request, 'critics/register.html')
 
 @login_required()
 def flux(request):

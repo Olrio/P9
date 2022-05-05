@@ -1,4 +1,12 @@
 * {
 background: yellowgreen;
-color: white;
  }
+
+body {
+color: white
+}
+
+.errorlist
+{
+color:red;
+}

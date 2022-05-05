@@ -39,7 +39,7 @@ urlpatterns = [
          name='password_changed'),
     # path('', authentication.views.login_page, name='login'),
     # path('logout/', authentication.views.logout_user, name='logout'),
-    path('register/', critics.views.register),
+    path('register/', authentication.views.RegisterPageView.as_view(), name='register'),
     path('flux/', critics.views.flux, name='flux'),
     path('flux/<int:id>/', critics.views.flux_detail, name='flux-detail'),
     path('subscribe/', critics.views.subscribe),
