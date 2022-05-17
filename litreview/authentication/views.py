@@ -1,10 +1,11 @@
 import django.contrib.auth.forms
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import View
 from django.conf import settings
-from authentication.forms import RegisterForm
+from authentication.forms import RegisterForm, UploadProfilePhotoForm
 
 class RegisterPageView(View):
     template_name = 'authentication/register.html'
@@ -26,28 +27,18 @@ class RegisterPageView(View):
                       self.template_name,
                       {'form': form})
 
+class UploadProfilePhoto(LoginRequiredMixin, View):
+    def get(self, request):
+        self.form_class = UploadProfilePhotoForm(instance=request.user)
+        return render(request,
+                      'authentication/change_profile_photo.html',
+                      context={'form':self.form_class})
 
-#
-# def logout_user(request):
-#     logout(request)
-#     return redirect('login')
-
-# def login_page(request):
-#     form = LoginForm()
-#     message = ''
-#     if request.method == 'POST':
-#         form = LoginForm(request.POST)
-#         if form.is_valid():
-#             user = authenticate(
-#                 username=form.cleaned_data['username'],
-#                 password=form.cleaned_data['password'],
-#             )
-#             if user is not None:
-#                 login(request, user)
-#                 return redirect('flux')
-#             else:
-#                 message = 'Identifiants invalides'
-#     return render(request,
-#                   'authentication/login.html',
-#                   context={'form': form,
-#                            'message': message})
+    def post(self, request):
+        self.form_class = UploadProfilePhotoForm(request.POST, request.FILES, instance=request.user)
+        if self.form_class.is_valid():
+            self.form_class.save()
+            return redirect('flux')
+        return render(request,
+                      'authentication/change_profile_photo.html',
+                      context={'form':self.form_class})

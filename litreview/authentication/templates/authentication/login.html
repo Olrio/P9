@@ -2,12 +2,14 @@
 
 {% block content %}
 
-<p>{{ message }}</p>
-<form action="" method="post">
-    {{ form.as_p }}
-    {% csrf_token %}
-    <button type="submit">Se connecter</button>
-</form>
-<a href="{% url 'register' %}">Créer un compte</a>
+<section class="forms">
+    <p>{{ message }}</p>
+    <form action="" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit">Se connecter</button>
+    </form>
+    <a href="{% url 'register' %}">Créer un compte</a>
+</section>
 
 {% endblock content %}

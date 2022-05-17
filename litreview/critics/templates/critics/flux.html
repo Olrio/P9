@@ -1,11 +1,11 @@
-{% extends 'critics/base_connected.html' %}
+{% extends '../base.html' %}
 
 {% block content %}
 
-
-        <button><a href="{% url 'ticket-create' %}">Demander une critique</a></button>
-        <br><br>
-        <button><a href="../create_critic">Créer une critique</a></button>
+        <div class="critic_management">
+           <button><a href="{% url 'ticket-create' %}">Demander une critique</a></button>
+            <button><a href="../create_critic">Créer une critique</a></button>
+        </div>
         <p>Liste des tickets : </p>
                     <ul>
                         {% for ticket in tickets %}

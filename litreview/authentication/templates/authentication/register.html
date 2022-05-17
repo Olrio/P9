@@ -2,17 +2,20 @@
 
 {% block content %}
 
+<section class="forms">
+    <h1>Inscrivez-vous</h1>
+    <form action="" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <div class="valid-cancel">
+            <button type="submit">S'inscrire</button>
+            <button><a href="{% url 'login' %}">Annuler</a></button>
+        </div>
+    </form>
 
-<h1>Inscrivez-vous</h1>
-<!--{% if form.errors %}
-{{ form.errors }}
-{% endif %}-->
-<form action="" method="post">
-    {{ form.as_p }}
-    {% csrf_token %}
-    <button type="submit">S'inscrire</button>
-</form>
-<button><a href="{% url 'login' %}">Retourner</a></button>
+</section>
+
+
 
 
 {% endblock content %}

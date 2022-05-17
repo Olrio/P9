@@ -4,13 +4,31 @@
     <head>
         <title>LITReview</title>
         <link rel="stylesheet" href="{% static 'critics/styles.css' %}" />
+        <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
     </head>
     <header>
+        {% if user.is_authenticated %}
         <nav>
+            <a href="/flux">Flux</a>
+            <a href="/posts">Posts</a>
+            <a href="/subscribe">Abonnements</a>
+            <div>
+                {% if request.user.profile_photo %}
+                    <img class="profile-photo" src="{{ request.user.profile_photo.url }}" alt="">
+                {% else %}
+                    <i class="fa-solid fa-circle-user fa-5x"></i>
+                {% endif %}
+            </div>
+            <div class="account_management">
+                <div class="display_username">{{ request.user }}</div>
+                <a href="{% url 'profile-photo' %}">Changer la photo de profil</a>
+                <a href="{% url 'new_password' %}">Modifier le mot de passe</a>
+                <a href="{% url 'logout' %}">Se déconnecter</a>
 
-            {% block nav %}{% endblock %}
+            </div>
 
         </nav>
+        {% endif %}
     </header>
     <body>
 

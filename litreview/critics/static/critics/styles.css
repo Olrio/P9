@@ -1,12 +1,96 @@
-* {
-background: yellowgreen;
- }
+header {
+position:fixed;
+top:2px;
+height:100px;
+width:100%;
+}
 
 body {
-color: white
+margin-top:100px;
+display: flex;
+flex-direction: column;
+color: black;
+background-color: lightgrey;
 }
 
 .errorlist
 {
 color:red;
+}
+
+nav {
+display:flex;
+justify-content: space-around;
+align-items:center;
+background-color: black;
+color: white;
+}
+
+nav a {
+color: white;
+text-decoration: none;
+}
+
+.account_management {
+display:flex;
+flex-direction: column;
+}
+
+.display_username {
+color:cyan;
+}
+
+.forms {
+display: flex;
+flex-direction: column;
+align-items: center;
+margin: auto;
+border: 2px black solid;
+padding: 10px;
+width:auto;
+}
+
+.forms form {
+display:flex;
+flex-direction: column;
+align-items:center;
+}
+
+.forms form>p {
+display: flex;
+text-align:center;
+flex-direction: column;
+}
+
+.forms form>p input{
+width: 200px;
+align-self:center;
+}
+
+.forms button {
+background-color: aquamarine;
+width:fit-content;
+}
+
+.valid-cancel {
+flex-direction:row;
+}
+
+.valid-cancel button{
+margin-left:50px;
+}
+
+.valid-cancel a {
+text-decoration: none;
+color: black;
+}
+
+.critic_management a {
+text-decoration:none;
+color:black;
+}
+
+.profile-photo {
+width : 85px;
+clip-path: ellipse(33% 50%);
 }

@@ -22,9 +22,11 @@ def subscribe(request):
 @login_required()
 def ticket_create(request):
     if request.method == 'POST':
-        form = TicketForm(request.POST)
+        form = TicketForm(request.POST, request.FILES)
         if form.is_valid():
-            new_ticket = form.save()
+            new_ticket = form.save(commit=False)
+            new_ticket.user = request.user
+            new_ticket.save()
             return redirect('flux-detail', new_ticket.id)
 
     else:
@@ -41,7 +43,8 @@ def ticket_update(request, id):
         form = TicketForm(request.POST, instance=ticket)
         if form.is_valid():
             form.save()
-            return redirect('flux-detail', ticket.id)
+            return render(request,
+                          'flux-detail.html', {"ticket":ticket})
     else:
         form = TicketForm(instance=ticket)
 
