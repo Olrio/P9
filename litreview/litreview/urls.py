@@ -39,8 +39,6 @@ urlpatterns = [
         template_name='authentication/password_change_done.html'
     ),
          name='password_changed'),
-    # path('', authentication.views.login_page, name='login'),
-    # path('logout/', authentication.views.logout_user, name='logout'),
     path('register/', authentication.views.RegisterPageView.as_view(), name='register'),
     path('flux/', critics.views.flux, name='flux'),
     path('flux/<int:id>/', critics.views.flux_detail, name='flux-detail'),
@@ -48,10 +46,10 @@ urlpatterns = [
     path('ticket/create/', critics.views.ticket_create, name='ticket-create'),
     path('ticket/<int:id>/change/', critics.views.ticket_update, name='ticket-update'),
     path('ticket/<int:id>/delete/', critics.views.ticket_delete, name='ticket-delete'),
-    path('create_critic/', critics.views.create_critic),
-    path('answer_critic/', critics.views.answer_critic),
+    path('critic/create/', critics.views.create_critic, name='critic-create'),
+    path('critic/answer/', critics.views.answer_critic, name='critic-answer'),
     path('posts/', critics.views.posts, name='posts'),
-    path('modify_critic/', critics.views.modify_critic),
+    path('critic/change/', critics.views.modify_critic, name='critic-update'),
     path('profile_photo/', authentication.views.UploadProfilePhoto.as_view(), name='profile-photo'),
 ]
 

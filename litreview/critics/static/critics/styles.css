@@ -1,8 +1,20 @@
 header {
 position:fixed;
 top:2px;
-height:100px;
+height:80px;
 width:100%;
+}
+
+.critic_management {
+position: fixed;
+top: 82px;
+height:50px;
+width: 100%;
+background-color: grey;
+}
+
+.critic_management button {
+margin:10px;
 }
 
 body {
@@ -93,4 +105,77 @@ color:black;
 .profile-photo {
 width : 85px;
 clip-path: ellipse(33% 50%);
+}
+
+/*.ticket_image {
+width:100px;
+}*/
+
+.ticket {
+display: flex;
+flex-direction: column;
+width: 80%;
+margin: auto;
+border: black 2px solid;
+padding: 15px;
+}
+
+.top_ticket {
+display: flex;
+justify-content: space-around;
+}
+
+.critic_management {
+display: flex;
+justify-content: center;
+}
+
+.critic_management button {
+margin-left: 25px;
+margin-right: 25px;
+}
+
+article {
+}
+
+article button, article a, article img {
+width: fit-content;
+align-self: center;
+margin-top:15px;
+}
+
+article button a {
+text-decoration: none;
+color: black;
+}
+
+.post_management {
+display: flex;
+justify-content: center;
+}
+
+.post_management button {
+margin-left: 25px;
+margin-right: 25px;
+}
+
+.delete_management button, .delete_management input {
+background-color: aquamarine;
+margin-top: 10px;
+margin-left:25px;
+margin-right: 25px;
+}
+
+.delete_management a {
+text-decoration: none;
+color: black;
+}
+
+#id_rating {
+display: flex;
+}
+
+#id_rating >div {
+margin-left:20px;
+margin-right:20px;
 }

@@ -1,27 +1,16 @@
 {% extends '../base.html' %}
 
 {% block content %}
+<section class="forms">
+    <h1>Livre / Article</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ ticket_form.as_p }}
+        <h1>Critique</h1>
+        {{ critic_form.as_p }}
+    <input type="submit" value="Envoyer">
+    </form>
+</section>
 
-<h1>Créer une critique (pas en réponse à un ticket)</h1>
-<h2>Livre / Article</h2>
-<h2>Titre</h2>
-<input type="text" name="book_title" id="book_title">
-<h2>Description</h2>
-<textarea name="description" id="description"></textarea>
-<h2>Image</h2>
-<button><a href="../ticket">Télécharger fichier</a></button><br><br><br>
-<h2>Critique</h2>
-<h2>Titre</h2>
-<input type="text" name="critic_title" id="critic_title">
-<h2>Note</h2>
-<input type="radio" name="note" id="0" value="0"><label for="0">0</label>
-<input type="radio" name="note" id="1" value="1"><label for="1">1</label>
-<input type="radio" name="note" id="2" value="2"><label for="2">2</label>
-<input type="radio" name="note" id="3" value="3"><label for="3">3</label>
-<input type="radio" name="note" id="4" value="4"><label for="4">4</label>
-<input type="radio" name="note" id="5" value="5"><label for="5">5</label>
-<h2>Commentaire</h2>
-<textarea name="comment" id="comment"></textarea>
-<button><a href="../flux">Envoyer</a></button>
 
 {% endblock %}

@@ -2,15 +2,18 @@
 
 {% block content %}
 
-<h1>Suivre d'autres utilisateurs</h1>
-<input type="text" name="username" id="username" placeholder="Nom d'utilisateur"><br><br>
-<button><a href="../subscribe">Envoyer</a></button>
-<h1>Abonnements</h1>
-<span>user1</span><button><a href="../subscribe">Désabonner</a></button><br>
-<span>user2</span><button><a href="../subscribe">Désabonner</a></button><br>
-<span>user3</span><button><a href="../subscribe">Désabonner</a></button><br>
-<h1>Abonnés</h1>
-<span>userA</span><br>
-<span>userB</span><br>
+<section class="forms">
+    <h1>Utilisateurs suivis</h1>
+    {% for follow in follows %}
+    <p>{{ follow.followed_user}}</p>
+    {% endfor %}
+
+    <h1>Suivre d'autres utilisateurs</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Envoyer">
+    </form>
+</section>
 
 {% endblock %}

@@ -1,11 +1,20 @@
 {% extends '../base.html' %}
 
 {% block content %}
-<h2>Post : {{ ticket.title }}</h2>
-<p>description :{{ ticket.description }}</p>
-<p>utilisateur : {{ ticket.user }}</p>
-<p>image : {{ ticket.image }}</p>
-<p>créé le : {{ ticket.time_created }}</p>
+<article class="ticket">
+    <div class="top_ticket">
+        <p>{{ ticket.user }} a demandé une critique</p>
+        <p>{{ ticket.time_created }}</p>
+    </div>
+    <h1>{{ ticket.title }}</h1>
+    <p>{{ ticket.description }}</p>
+    {% if ticket.image %}
+        <img class="ticket_image" src="{{ ticket.image.url}}" alt="">
+    {% endif %}
+    <p><a href="{% url 'flux' %}">Revenir au flux</a></p>
+</article>
+<article class="review">
+    <p>{{ critic.user }} a posté une critique</p>
+</article>
 
-<a href="{% url 'flux' %}">Revenir au flux</a>
 {% endblock %}

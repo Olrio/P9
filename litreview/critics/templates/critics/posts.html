@@ -2,18 +2,30 @@
 
 {% block content %}
 <section class="forms">
-<h1>Voir vos propres posts</h1>
-
-<p>Liste des tickets : </p>
-
+<h1>Vos posts</h1>
 <ul>
     {% for ticket in tickets %}
-        <li>
-            <a href="{% url 'flux-detail' ticket.id %}">{{ ticket.title }}</a> <button><a href="{% url 'ticket-update' ticket.id %}">Modifier</a></button>
+    {% if ticket.user == request.user %}
+    <article class="ticket">
+        <div class="top_ticket">
+            <p>Vous avez demandé une critique</p>
+            <p>{{ ticket.time_created }}</p>
+        </div>
+        <h1>{{ ticket.title }}</h1>
+        <p>{{ ticket.description }}</p>
+        {% if ticket.image %}
+            <img class="ticket_image" src="{{ ticket.image.url}}" alt="">
+        {% endif %}
+        <div class="post_management">
+            <button><a href="{% url 'ticket-update' ticket.id %}">Modifier</a></button>
             <button><a href="{% url 'ticket-delete' ticket.id %}">Supprimer</a></button>
-        </li>
+        </div>
+
+    </article>
+    {% endif %}
     {% endfor %}
 </ul>
+    <p><a href="{% url 'flux' %}">Revenir au flux</a></p>
 </section>
 
 {% endblock %}

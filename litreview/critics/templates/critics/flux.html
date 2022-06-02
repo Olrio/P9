@@ -4,15 +4,30 @@
 
         <div class="critic_management">
            <button><a href="{% url 'ticket-create' %}">Demander une critique</a></button>
-            <button><a href="../create_critic">Créer une critique</a></button>
+            <button><a href="{% url 'critic-create' %}">Créer une critique</a></button>
         </div>
-        <p>Liste des tickets : </p>
-                    <ul>
-                        {% for ticket in tickets %}
-                            {% if ticket.user == request.user  %}
-                            <li><a href="{% url 'flux-detail' ticket.id %}">{{ ticket.title }}</a> <button><a href="../answer_critic?demand={{ticket.title}}">Créer une critique</a></button></li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
+            <ul>
+                {% for ticket in tickets %}
+                    <article class="ticket">
+                        <div class="top_ticket">
+                            <p>{{ ticket.user }} a demandé une critique</p>
+                            <p>{{ ticket.time_created|date:"H:i, d M Y"  }}</p>
+                        </div>
+                        <h1>{{ ticket.title }}</h1>
+                        <p>{{ ticket.description|truncatechars:50 }}</p>
+                        {% if ticket.image %}
+                            <img class="ticket_image" src="{{ ticket.image.url}}" alt="">
+                        {% endif %}
+                        <a href="{% url 'flux-detail' ticket.id %}">{{ ticket.title }}</a>
+                    </article>
+                {% endfor %}
+                {% for review in reviews %}
+                <article class="review">
+                    <p>{{ review.user }} a posté une critique</p>
+                    <p>{{ review.time_created|date:"H:i, d M Y" }}</p>
+                    <p>{{ review.ticket.title }}</p>
+                </article>
+                {% endfor %}
+            </ul>
 
 {% endblock %}
