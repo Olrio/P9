@@ -1,0 +1,15 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<section class="forms">
+    <p>Etes-vous sûr de vouloir vous désabonner de l'utilisateur :  {{ follow.followed_user }} ?</p>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="delete_management">
+            <input type="submit" value="Supprimer">
+            <button><a href="{% url 'subscribe' %}">Annuler</a></button>
+        </div>
+    </form>
+</section>
+{% endblock %}

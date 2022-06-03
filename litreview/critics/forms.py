@@ -1,8 +1,5 @@
 from django import forms
-
 from critics.models import Ticket, Review, UserFollows
-from authentication.models import User
-
 
 
 class TicketForm(forms.ModelForm):
@@ -23,6 +20,4 @@ class FollowUsersForm(forms.ModelForm):
     class Meta:
         model = UserFollows
         fields = ['followed_user']
-
-
 

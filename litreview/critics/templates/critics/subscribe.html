@@ -4,8 +4,8 @@
 
 <section class="forms">
     <h1>Utilisateurs suivis</h1>
-    {% for follow in follows %}
-    <p>{{ follow.followed_user}}</p>
+    {% for followed in followed_users %}
+    <p>{{ followed.followed_user }} <button><a href="{% url 'unsubscribe' followed.id %}">Se désabonner</a></button></p>
     {% endfor %}
 
     <h1>Suivre d'autres utilisateurs</h1>
