@@ -1,0 +1,36 @@
+{% extends '../base.html' %}
+{% load critics_extras %}
+{% block content %}
+<section class="forms">
+    <p>Etes-vous sûr de vouloir supprimer cette critique ?</p>
+
+    <article class="ticket">
+        <div class="top_ticket">
+            <p>{{ review.time_created }}</p>
+        </div>
+        <h1>{{ review.headline }}</h1>
+        <div class="rating">
+           {% for rating in review|starring %}
+                <i class="fa-solid fa-star"></i>
+            {% endfor %}
+            {% for rating in review|antistarring %}
+                <i class="fa-regular fa-star"></i>
+            {% endfor %}
+        </div>
+
+        <p>{{ review.body }}</p>
+        {% if review.ticket.image %}
+            <img class="ticket_image" src="{{ review.ticket.image.url}}" alt="">
+        {% endif %}
+    </article>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="delete_management">
+            <input type="submit" value="Supprimer">
+            <button><a href="{% url 'posts' %}">Annuler</a></button>
+        </div>
+    </form>
+</section>
+
+{% endblock %}

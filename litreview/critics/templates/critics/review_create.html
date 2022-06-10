@@ -1,5 +1,4 @@
 {% extends '../base.html' %}
-
 {% block content %}
 <section class="forms">
     <h1>Livre / Article</h1>
@@ -7,10 +6,8 @@
         {% csrf_token %}
         {{ ticket_form.as_p }}
         <h1>Critique</h1>
-        {{ critic_form.as_p }}
-    <input type="submit" value="Envoyer">
+        {{ review_form.as_p }}
+        <input type="submit" value="Envoyer">
     </form>
 </section>
-
-
-{% endblock %}
+{% endblock content %}

@@ -11,7 +11,7 @@ class Ticket(models.Model):
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     image = models.ImageField(null=True, blank=True)
     time_created = models.DateTimeField(auto_now_add=True)
-    IMAGE_MAX_SIZE = (600, 600)
+    IMAGE_MAX_SIZE = (200, 200)
 
     def resize_image(self):
         image = Image.open(self.image)
@@ -20,7 +20,8 @@ class Ticket(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        self.resize_image()
+        if self.image:
+            self.resize_image()
 
 
 class Review(models.Model):

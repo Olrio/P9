@@ -1,0 +1,24 @@
+{% extends '../base.html' %}
+{% block content %}
+
+<section class="forms">
+    <h1>Livre / Article</h1>
+    <article class="ticket">
+    <div class="top_ticket">
+        <p>{{ ticket.user }} a demandé une critique</p>
+        <p>{{ ticket.time_created }}</p>
+    </div>
+    <h1>{{ ticket.title }}</h1>
+    <p>{{ ticket.description }}</p>
+    {% if ticket.image %}
+        <img class="ticket_image" src="{{ ticket.image.url}}" alt="">
+    {% endif %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Critique</h1>
+        {{ review_form.as_p }}
+        <input type="submit" value="Envoyer">
+    </form>
+</section>
+{% endblock content %}
+

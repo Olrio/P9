@@ -108,20 +108,31 @@ width : 85px;
 clip-path: ellipse(33% 50%);
 }
 
-/*.ticket_image {
-width:100px;
-}*/
-
-.ticket {
+.ticket, .review {
 display: flex;
 flex-direction: column;
 width: 80%;
 margin: auto;
+margin-top:20px;
 border: black 2px solid;
 padding: 15px;
 }
 
-.top_ticket {
+.review_ticket {
+text-align: center;
+border: black 2px solid;
+padding-left:30%;
+padding-right:30%;
+padding-top:10px;
+padding-bottom:10px;
+}
+
+.author_and_date {
+display: flex;
+justify-content: space-around;
+}
+
+.details_and_review_create {
 display: flex;
 justify-content: space-around;
 }
@@ -136,8 +147,6 @@ margin-left: 25px;
 margin-right: 25px;
 }
 
-article {
-}
 
 article button, article a, article img {
 width: fit-content;

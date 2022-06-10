@@ -1,33 +1,59 @@
 {% extends '../base.html' %}
-
+{% load critics_extras %}
 {% block content %}
-
         <div class="critic_management">
            <button><a href="{% url 'ticket-create' %}">Demander une critique</a></button>
-            <button><a href="{% url 'critic-create' %}">Créer une critique</a></button>
+            <button><a href="{% url 'review-create' %}">Créer une critique</a></button>
         </div>
-            <ul>
-                {% for ticket in tickets %}
+        <ul>
+            {% for instance in tickets_and_reviews %}
+                {% if instance|model_type == "Ticket" %}
                     <article class="ticket">
-                        <div class="top_ticket">
-                            <p>{{ ticket.user }} a demandé une critique</p>
-                            <p>{{ ticket.time_created|date:"H:i, d M Y"  }}</p>
+                        <div class="author_and_date">
+                            <p>{{ instance.user }} a demandé une critique</p>
+                            <p>{{ instance.time_created|date:"H:i, d M Y"  }}</p>
                         </div>
-                        <h1>{{ ticket.title }}</h1>
-                        <p>{{ ticket.description|truncatechars:50 }}</p>
-                        {% if ticket.image %}
-                            <img class="ticket_image" src="{{ ticket.image.url}}" alt="">
+                        <h1>{{ instance.title }}</h1>
+                        <p>{{ instance.description|truncatechars:50 }}</p>
+                        {% if instance.image %}
+                            <img class="ticket_image" src="{{ instance.image.url}}" alt="">
                         {% endif %}
-                        <a href="{% url 'flux-detail' ticket.id %}">{{ ticket.title }}</a>
+                        <div class="details_and_review_create">
+                            {% if instance in reviewable %}
+                            <button><a href="{% url 'review-answer-ticket' instance.id %}">Créer une critique</a></button>
+                            {% endif %}
+                            <button><a href="{% url 'ticket-read' instance.id %}">Détails</a></button>
+                        </div>
                     </article>
-                {% endfor %}
-                {% for review in reviews %}
-                <article class="review">
-                    <p>{{ review.user }} a posté une critique</p>
-                    <p>{{ review.time_created|date:"H:i, d M Y" }}</p>
-                    <p>{{ review.ticket.title }}</p>
-                </article>
-                {% endfor %}
-            </ul>
+                {% elif instance|model_type == "Review" %}
+                    <article class="review">
+                        <div class="author_and_date">
+                            <p>{{ instance.user }} a publié une critique</p>
+                            <p>{{ instance.time_created|date:"H:i, d M Y" }}</p>
+                        </div>
 
-{% endblock %}
+                        <p>{{ instance.headline }} -
+                            {% for rating in instance|starring %}
+                                <i class="fa-solid fa-star"></i>
+                            {% endfor %}
+                            {% for rating in instance|antistarring %}
+                                <i class="fa-regular fa-star"></i>
+                            {% endfor %}
+                        </p>
+                        <p>{{ instance.body|truncatechars:50 }}</p>
+                        <div class="review_ticket">
+                            <p> Ticket de - {{ instance.ticket.user }}</p>
+                            <p> {{ instance.ticket.title }}</p>
+                            {% if instance.ticket.image %}
+                                <img class="review_image" src="{{ instance.ticket.image.url}}" alt="">
+                            {% endif %}
+                            {% if instance.ticket in reviewable %}
+                                <button><a href="{% url 'review-answer-ticket' instance.id %}">Créer une critique</a></button>
+                            {% endif %}
+                        </div>
+                        <button><a href="{% url 'review-read' instance.id %}">Détails</a></button>
+                    </article>
+                {% endif %}
+            {% endfor %}
+        </ul>
+{% endblock content %}

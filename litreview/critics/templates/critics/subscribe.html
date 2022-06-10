@@ -8,6 +8,11 @@
     <p>{{ followed.followed_user }} <button><a href="{% url 'unsubscribe' followed.id %}">Se désabonner</a></button></p>
     {% endfor %}
 
+    <h1>Abonnés</h1>
+    {% for follower in followers %}
+    <p>{{ follower.user }}</p>
+    {% endfor %}
+
     <h1>Suivre d'autres utilisateurs</h1>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
