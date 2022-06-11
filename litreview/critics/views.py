@@ -16,16 +16,33 @@ def flux(request):
         Q(user=request.user) |
         Q(ticket__user=request.user)
     )
+
+    '''
+        a queryset of all reviews whose author is not its ticket author
+        such a queryset is needed to know if a review is possible on an autoreview
+        if the ticket of the autoreview is present in this queryset, review on this ticket would be disable
+        '''
+    reviews_not_autoreview = Review.objects.filter(
+        Q(user__in=[follow.followed_user for follow in UserFollows.objects.filter(user=request.user)]) |
+        Q(user=request.user) |
+        Q(ticket__user=request.user)).exclude(Q(user=F("ticket__user")))
+
+    '''
+    a queryset of all autoreviews, i.e. review an dticket have the same author
+    '''
+    autoreviews = Review.objects.filter(
+        Q(user__in=[follow.followed_user for follow in UserFollows.objects.filter(user=request.user)]) |
+        Q(user=request.user) |
+        Q(ticket__user=request.user)).filter(Q(user=F("ticket__user")))
+
+
     tickets = Ticket.objects.filter(
         Q(user__in=[follow.followed_user for follow in UserFollows.objects.filter(user=request.user)]) |
-        Q(user=request.user)
-    ).exclude(
-        id__in=[review.ticket.id for review in reviews], user__in=[review.user for review in reviews])
-
+        Q(user=request.user)).exclude(Q(id__in=[review.ticket.id for review in autoreviews]))
 
     reviewable_tickets =  Ticket.objects.filter(
-        Q(user__in=[follow.followed_user for follow in UserFollows.objects.filter(user=request.user)]) | Q(user=request.user)).filter(
-        ~Q(id__in=[review.ticket.id for review in reviews]) | Q(user=F("review__user")))
+        Q(user__in=[follow.followed_user for follow in UserFollows.objects.filter(user=request.user)]) | Q(user=request.user)).exclude(
+        Q(id__in=[review.ticket.id for review in reviews_not_autoreview]))
 
 
     tickets_and_reviews = sorted(

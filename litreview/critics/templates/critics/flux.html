@@ -43,12 +43,13 @@
                         <p>{{ instance.body|truncatechars:50 }}</p>
                         <div class="review_ticket">
                             <p> Ticket de - {{ instance.ticket.user }}</p>
-                            <p> {{ instance.ticket.title }}</p>
+                            <p> {{ instance.ticket.title }} </p>
+                            <p>{{ instance.ticket.time_created|date:"H:i, d M Y" }}</p>
                             {% if instance.ticket.image %}
                                 <img class="review_image" src="{{ instance.ticket.image.url}}" alt="">
                             {% endif %}
                             {% if instance.ticket in reviewable %}
-                                <button><a href="{% url 'review-answer-ticket' instance.id %}">Créer une critique</a></button>
+                                <button><a href="{% url 'review-answer-ticket' instance.ticket.id %}">Créer une critique</a></button>
                             {% endif %}
                         </div>
                         <button><a href="{% url 'review-read' instance.id %}">Détails</a></button>
