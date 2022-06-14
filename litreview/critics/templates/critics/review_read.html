@@ -3,7 +3,8 @@
 {% block content %}
 <article class="ticket">
     <div class="top_ticket">
-        <p>{{ review.time_created }}</p>
+        <p>{% get_detail_instance_user user "review" %} publié une critique</p>
+        <p>Le {{ review.time_created }}</p>
     </div>
     <h1>{{ review.headline }}</h1>
     <div class="rating">

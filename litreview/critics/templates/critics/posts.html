@@ -8,7 +8,7 @@
         {% if instance|model_type == "Ticket" %}
             <article class="ticket">
                 <div class="top_ticket">
-                    <p>{{ instance.user }} a demandé une critique</p>
+                    <p>{% get_instance_user user %} demandé une critique</p>
                     <p>{{ instance.time_created|date:"H:i, d M Y"  }}</p>
                 </div>
                 <h1>{{ instance.title }}</h1>
@@ -24,7 +24,8 @@
             </article>
         {% elif instance|model_type == "Review" %}
             <article class="review">
-                <p>{{ instance.user }} a posté une critique</p>
+                <h1>{{ instance.headline }}</h1>
+                <p>{% get_instance_user user %} posté une critique</p>
                 <p>{{ instance.time_created|date:"H:i, d M Y" }}</p>
                 <p>{{ instance.ticket.title }}
                     {% for rating in instance|starring %}

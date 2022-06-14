@@ -1,10 +1,10 @@
 {% extends '../base.html' %}
-
+{% load critics_extras %}
 {% block content %}
 <article class="ticket">
     <div class="top_ticket">
-        <p>{{ ticket.user }} a demandé une critique</p>
-        <p>{{ ticket.time_created }}</p>
+        <p>{% get_detail_instance_user user "ticket" %} demandé une critique</p>
+        <p> le {{ ticket.time_created }}</p>
     </div>
     <h1>{{ ticket.title }}</h1>
     <p>{{ ticket.description }}</p>

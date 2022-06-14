@@ -8,6 +8,7 @@ from critics.models import Ticket, Review, UserFollows
 from critics.forms import TicketForm, ReviewForm, FollowUsersForm
 from authentication.models import User
 from django.core.exceptions import ValidationError
+import datetime
 
 @login_required()
 def flux(request):
@@ -111,7 +112,9 @@ def ticket_update(request, id):
     if request.method == 'POST':
         form = TicketForm(request.POST, request.FILES, instance=ticket)
         if form.is_valid():
-            form.save()
+            ticket = form.save(commit=False)
+            ticket.time_created = datetime.datetime.now()
+            ticket.save()
             return render(request,
                           'critics/ticket_read.html', {"ticket":ticket})
     else:
@@ -163,7 +166,9 @@ def review_update(request, id):
         ticket_form = TicketForm(request.POST, request.FILES, instance=ticket)
         if all([ticket_form.is_valid(),review_form.is_valid()]):
             ticket_form.save()
-            review_form.save()
+            review = review_form.save(commit=False)
+            review.time_created = datetime.datetime.now()
+            review.save()
             return render(request,
                           'critics/review_read.html', {"review":review})
     else:

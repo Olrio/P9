@@ -10,7 +10,7 @@
                 {% if instance|model_type == "Ticket" %}
                     <article class="ticket">
                         <div class="author_and_date">
-                            <p>{{ instance.user }} a demandé une critique</p>
+                            <p>{% get_instance_user user %} demandé une critique</p>
                             <p>{{ instance.time_created|date:"H:i, d M Y"  }}</p>
                         </div>
                         <h1>{{ instance.title }}</h1>
@@ -28,7 +28,7 @@
                 {% elif instance|model_type == "Review" %}
                     <article class="review">
                         <div class="author_and_date">
-                            <p>{{ instance.user }} a publié une critique</p>
+                            <p>{% get_instance_user user %}  publié une critique</p>
                             <p>{{ instance.time_created|date:"H:i, d M Y" }}</p>
                         </div>
 
@@ -42,7 +42,7 @@
                         </p>
                         <p>{{ instance.body|truncatechars:50 }}</p>
                         <div class="review_ticket">
-                            <p> Ticket de - {{ instance.ticket.user }}</p>
+                            <p>{% get_ticket_author user %}</p>
                             <p> {{ instance.ticket.title }} </p>
                             <p>{{ instance.ticket.time_created|date:"H:i, d M Y" }}</p>
                             {% if instance.ticket.image %}
