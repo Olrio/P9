@@ -4,6 +4,7 @@ from itertools import chain
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q, F, ExpressionWrapper, CharField
+from django.core.paginator import Paginator
 from critics.models import Ticket, Review, UserFollows
 from critics.forms import TicketForm, ReviewForm, FollowUsersForm
 from authentication.models import User
@@ -51,7 +52,16 @@ def flux(request):
         key=lambda instance:instance.time_created,
         reverse=True
     )
-    return render(request, 'critics/flux.html', {'tickets_and_reviews': tickets_and_reviews, 'reviewable': list(reviewable_tickets)})
+
+    paginator = Paginator(tickets_and_reviews, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'page_obj': page_obj,
+        'reviewable': list(reviewable_tickets)
+    }
+
+    return render(request, 'critics/flux.html', context=context)
 
 
 @login_required()

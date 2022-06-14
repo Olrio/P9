@@ -1,12 +1,13 @@
 {% extends '../base.html' %}
 {% load critics_extras %}
+
 {% block content %}
         <div class="critic_management">
            <button><a href="{% url 'ticket-create' %}">Demander une critique</a></button>
             <button><a href="{% url 'review-create' %}">Créer une critique</a></button>
         </div>
         <ul>
-            {% for instance in tickets_and_reviews %}
+            {% for instance in page_obj %}
                 {% if instance|model_type == "Ticket" %}
                     <article class="ticket">
                         <div class="author_and_date">
@@ -56,5 +57,20 @@
                     </article>
                 {% endif %}
             {% endfor %}
+            <span>
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">première</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">précédente</a>
+                {% endif %}
+            </span>
+            <span>
+                Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
+            </span>
+            <span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number  }}">suivante</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">dernière</a>
+                {% endif %}
+            </span>
         </ul>
 {% endblock content %}
