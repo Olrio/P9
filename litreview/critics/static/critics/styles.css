@@ -17,8 +17,25 @@ background-color: grey;
 margin:10px;
 }
 
+.pages_navigation {
+position: fixed;
+display: flex;
+justify-content: space-around;
+align-items: center;
+top: 140px;
+height:30px;
+width: 100%;
+background-color: white;
+}
+
+#previous, #current, #next {
+display: flex;
+justify-content: space-around;
+width: 33%;
+}
+
 body {
-margin-top:100px;
+margin-top:160px;
 display: flex;
 flex-direction: column;
 color: black;

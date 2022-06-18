@@ -6,6 +6,23 @@
            <button><a href="{% url 'ticket-create' %}">Demander une critique</a></button>
             <button><a href="{% url 'review-create' %}">Créer une critique</a></button>
         </div>
+        <div class="pages_navigation">
+            <span id="previous">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">première</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">précédente</a>
+                {% endif %}
+            </span>
+            <span id="current">
+                Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
+            </span>
+            <span id="next">
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number  }}">suivante</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">dernière</a>
+                {% endif %}
+            </span>
+        </div>
         <ul>
             {% for instance in page_obj %}
                 {% if instance|model_type == "Ticket" %}
@@ -57,20 +74,5 @@
                     </article>
                 {% endif %}
             {% endfor %}
-            <span>
-                {% if page_obj.has_previous %}
-                    <a href="?page=1">première</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">précédente</a>
-                {% endif %}
-            </span>
-            <span>
-                Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
-            </span>
-            <span>
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number  }}">suivante</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">dernière</a>
-                {% endif %}
-            </span>
         </ul>
 {% endblock content %}
