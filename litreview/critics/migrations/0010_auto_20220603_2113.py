@@ -3,6 +3,7 @@
 from django.db import migrations
 from PIL import Image
 
+
 def resize_image(apps, scheme_editor):
     Ticket = apps.get_model('critics', 'Ticket')
     for ticket in Ticket.objects.all():

@@ -1,7 +1,6 @@
 from django import forms
-from critics.models import Ticket, Review, UserFollows
+from critics.models import Ticket, Review
 from django.core.exceptions import ValidationError
-from django.db import IntegrityError
 from django.shortcuts import get_object_or_404
 from authentication.models import User
 
@@ -12,12 +11,14 @@ class TicketForm(forms.ModelForm):
         exclude = ['user']
         labels = {'title': 'Titre'}
 
+
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         exclude = ['user', 'ticket']
         labels = {'headline': 'Titre', 'body': 'Commentaire', 'rating': 'Note'}
-        rating_choices = [('0', 0), ('1', 1), ('2', 2), ('3', 3), ('4', 4), ('5', 5)]
+        rating_choices = [('0', 0), ('1', 1), ('2', 2),
+                          ('3', 3), ('4', 4), ('5', 5)]
         widgets = {'rating': forms.RadioSelect(choices=rating_choices)}
 
 
@@ -35,10 +36,12 @@ class FollowUsersForm(forms.Form):
 
         if username == str(self.user):
             raise ValidationError("Vous ne pouvez pas vous suivre vous-même !")
-        elif username in [str(followed.followed_user) for followed in self.followed_users]:
+        elif username in [str(
+                followed.followed_user) for followed in self.followed_users]:
             raise ValidationError(f"Vous êtes déjà abonné à {username}")
         elif username not in str(User.objects.all()):
-            raise ValidationError(f"{username} n'est pas un utilisateur du site !")
+            raise ValidationError(
+                f"{username} n'est pas un utilisateur du site !")
         else:
             user = get_object_or_404(self.user_to_follow, username=username)
         return user

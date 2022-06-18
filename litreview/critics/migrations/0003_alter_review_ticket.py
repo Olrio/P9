@@ -14,6 +14,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='review',
             name='ticket',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='critics.ticket'),
+            field=models.ForeignKey(
+                default=None,
+                on_delete=django.db.models.deletion.CASCADE,
+                to='critics.ticket'),
         ),
     ]

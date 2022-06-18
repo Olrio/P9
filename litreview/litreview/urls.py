@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
-from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.views import LoginView, LogoutView,\
+    PasswordChangeView, PasswordChangeDoneView
 import critics.views
 import authentication.views
 
@@ -39,21 +40,36 @@ urlpatterns = [
         template_name='authentication/password_change_done.html'
     ),
          name='password_changed'),
-    path('register/', authentication.views.RegisterPageView.as_view(), name='register'),
-    path('flux/', critics.views.flux, name='flux'),
-    path('subscribe/', critics.views.subscribe, name='subscribe'),
-    path('unsubscribe/<int:id>', critics.views.unsubscribe, name='unsubscribe'),
-    path('ticket/create/', critics.views.ticket_create, name='ticket-create'),
-    path('ticket/<int:id>/read/', critics.views.ticket_read, name='ticket-read'),
-    path('ticket/<int:id>/change/', critics.views.ticket_update, name='ticket-update'),
-    path('ticket/<int:id>/delete/', critics.views.ticket_delete, name='ticket-delete'),
-    path('review/create/', critics.views.review_create, name='review-create'),
-    path('review/<int:id>/read/', critics.views.review_read, name='review-read'),
-    path('review/<int:id>/change/', critics.views.review_update, name='review-update'),
-    path('review/<int:id>/delete/', critics.views.review_delete, name='review-delete'),
-    path('review/<int:id>/answer/', critics.views.review_answer_ticket, name='review-answer-ticket'),
-    path('posts/', critics.views.posts, name='posts'),
-    path('profile_photo/', authentication.views.UploadProfilePhoto.as_view(), name='profile-photo'),
+    path('register/', authentication.views.RegisterPageView.as_view(),
+         name='register'),
+    path('flux/', critics.views.flux,
+         name='flux'),
+    path('subscribe/', critics.views.subscribe,
+         name='subscribe'),
+    path('unsubscribe/<int:id>', critics.views.unsubscribe,
+         name='unsubscribe'),
+    path('ticket/create/', critics.views.ticket_create,
+         name='ticket-create'),
+    path('ticket/<int:id>/read/', critics.views.ticket_read,
+         name='ticket-read'),
+    path('ticket/<int:id>/change/', critics.views.ticket_update,
+         name='ticket-update'),
+    path('ticket/<int:id>/delete/', critics.views.ticket_delete,
+         name='ticket-delete'),
+    path('review/create/', critics.views.review_create,
+         name='review-create'),
+    path('review/<int:id>/read/', critics.views.review_read,
+         name='review-read'),
+    path('review/<int:id>/change/', critics.views.review_update,
+         name='review-update'),
+    path('review/<int:id>/delete/', critics.views.review_delete,
+         name='review-delete'),
+    path('review/<int:id>/answer/', critics.views.review_answer_ticket,
+         name='review-answer-ticket'),
+    path('posts/', critics.views.posts,
+         name='posts'),
+    path('profile_photo/', authentication.views.UploadProfilePhoto.as_view(),
+         name='profile-photo'),
 ]
 
 if settings.DEBUG:
