@@ -76,13 +76,20 @@ align-items: center;
 margin: auto;
 border: 2px black solid;
 padding: 10px;
-width:auto;
+width:80%;
 }
 
 .forms form {
 display:flex;
 flex-direction: column;
 align-items:center;
+}
+
+.forms ul {
+display: flex;
+flex-direction: column;
+width: 90%;
+align-items: center;
 }
 
 .forms form>p {
@@ -128,7 +135,7 @@ clip-path: ellipse(33% 50%);
 .ticket, .review {
 display: flex;
 flex-direction: column;
-width: 80%;
+width: 90%;
 margin: auto;
 margin-top:20px;
 border: black 2px solid;

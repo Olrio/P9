@@ -16,31 +16,42 @@
                 {% if instance.image %}
                     <img class="ticket_image" src="{{ instance.image.url}}" alt="">
                 {% endif %}
-                <a href="{% url 'ticket-read' instance.id %}">{{ instance.title }}</a>
                 <div class="post_management">
+                    <button><a href="{% url 'ticket-read' instance.id %}">Détails</a></button>
                     <button><a href="{% url 'ticket-update' instance.id %}">Modifier</a></button>
                     <button><a href="{% url 'ticket-delete' instance.id %}">Supprimer</a></button>
                 </div>
             </article>
         {% elif instance|model_type == "Review" %}
             <article class="review">
-                <h1>{{ instance.headline }}</h1>
-                <p>{% get_instance_user user %} posté une critique</p>
-                <p>{{ instance.time_created|date:"H:i, d M Y" }}</p>
-                <p>{{ instance.ticket.title }}
-                    {% for rating in instance|starring %}
-                                <i class="fa-solid fa-star"></i>
-                            {% endfor %}
-                            {% for rating in instance|antistarring %}
-                                <i class="fa-regular fa-star"></i>
-                            {% endfor %}
+                <div class="author_and_date">
+                    <p>{% get_instance_user user %}  publié une critique</p>
+                    <p>{{ instance.time_created|date:"H:i, d M Y" }}</p>
+                </div>
+                <p>
+                    {{ instance.headline }}
+                </p>
+                <p> {% for rating in instance|starring %}
+                        <i class="fa-solid fa-star"></i>
+                    {% endfor %}
+                    {% for rating in instance|antistarring %}
+                        <i class="fa-regular fa-star"></i>
+                    {% endfor %}
                 </p>
                 <p>{{ instance.body|truncatechars:50 }}</p>
-                {% if instance.ticket.image %}
-                    <img class="ticket_image" src="{{ instance.ticket.image.url}}" alt="">
-                {% endif %}
-                <a href="{% url 'review-read' instance.id %}">{{ instance.ticket.title }}</a>
+                <div class="review_ticket">
+                    <p>{% get_ticket_author user %}</p>
+                    <p> {{ instance.ticket.title }} </p>
+                    <p>{{ instance.ticket.time_created|date:"H:i, d M Y" }}</p>
+                    {% if instance.ticket.image %}
+                        <img class="review_image" src="{{ instance.ticket.image.url}}" alt="">
+                    {% endif %}
+                    {% if instance.ticket in reviewable %}
+                        <button><a href="{% url 'review-answer-ticket' instance.ticket.id %}">Créer une critique</a></button>
+                    {% endif %}
+                </div>
                 <div class="post_management">
+                    <button><a href="{% url 'review-read' instance.id %}">Détails</a></button>
                     <button><a href="{% url 'review-update' instance.id %}">Modifier</a></button>
                     <button><a href="{% url 'review-delete' instance.id %}">Supprimer</a></button>
                 </div>
