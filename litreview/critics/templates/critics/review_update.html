@@ -7,6 +7,9 @@
     {% csrf_token %}
     {{ form.as_p }}
     {{ ticket_form.as_p }}
+    {% if review.ticket.image %}
+        <img class="ticket_image" src="{{ review.ticket.image.url}}" alt="">
+    {% endif %}
     {{ review_form.as_p }}
     <input type="submit" value="Envoyer">
 </form>

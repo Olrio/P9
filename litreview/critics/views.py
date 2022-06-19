@@ -170,7 +170,8 @@ def ticket_update(request, ticket_id):
                 {"ticket": ticket})
     else:
         form = TicketForm(instance=ticket)
-    return render(request, "critics/ticket_update.html", {"form": form})
+    return render(request, "critics/ticket_update.html", {"form": form,
+                                                          "ticket": ticket})
 
 
 @login_required()
@@ -223,8 +224,9 @@ def review_update(request, review_id):
         review_form = ReviewForm(request.POST, request.FILES, instance=review)
         ticket_form = TicketForm(request.POST, request.FILES, instance=ticket)
         if all([ticket_form.is_valid(), review_form.is_valid()]):
-            ticket_form.save()
+            ticket = ticket_form.save()
             review = review_form.save(commit=False)
+            review.ticket = ticket
             review.time_created = datetime.datetime.now()
             review.save()
             return render(
@@ -237,7 +239,9 @@ def review_update(request, review_id):
     return render(
         request,
         "critics/review_update.html",
-        {"review_form": review_form, "ticket_form": ticket_form},
+        {"review_form": review_form,
+         "ticket_form": ticket_form,
+         "review": review},
     )
 
 
