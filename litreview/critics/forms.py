@@ -16,14 +16,18 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         exclude = ['user', 'ticket']
-        labels = {'headline': 'Titre', 'body': 'Commentaire', 'rating': 'Note'}
+        labels = {'headline': 'Titre',
+                  'body': 'Commentaires',
+                  'rating': 'Note'}
         rating_choices = [('0', 0), ('1', 1), ('2', 2),
                           ('3', 3), ('4', 4), ('5', 5)]
         widgets = {'rating': forms.RadioSelect(choices=rating_choices)}
 
 
 class FollowUsersForm(forms.Form):
-    user_to_follow = forms.CharField(max_length=20)
+    user_to_follow = forms.CharField(
+        max_length=20,
+        label="Utilisateur à suivre")
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)

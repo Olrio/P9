@@ -39,7 +39,7 @@
                 {% if instance.ticket.image %}
                     <img class="ticket_image" src="{{ instance.ticket.image.url}}" alt="">
                 {% endif %}
-                <a href="{% url 'review-read' instance.ticket.id %}">{{ instance.ticket.title }}</a>
+                <a href="{% url 'review-read' instance.id %}">{{ instance.ticket.title }}</a>
                 <div class="post_management">
                     <button><a href="{% url 'review-update' instance.id %}">Modifier</a></button>
                     <button><a href="{% url 'review-delete' instance.id %}">Supprimer</a></button>

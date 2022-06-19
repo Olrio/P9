@@ -288,4 +288,8 @@ def posts(request):
     context = {
         "tickets_and_reviews": tickets_and_reviews,
     }
+
+    for objet in reviews:
+        print(objet.headline, objet.id)
+
     return render(request, "critics/posts.html", context=context)
