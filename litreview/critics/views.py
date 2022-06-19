@@ -277,9 +277,7 @@ def review_answer_ticket(request, review_id):
 @login_required()
 def posts(request):
     reviews = Review.objects.filter(user=request.user)
-    tickets = Ticket.objects.filter(user=request.user).exclude(
-        id__in=[review.ticket.id for review in reviews]
-    )
+    tickets = Ticket.objects.filter(user=request.user)
     tickets_and_reviews = sorted(
         chain(tickets, reviews),
         key=lambda instance: instance.time_created,
