@@ -27,7 +27,9 @@ class ReviewForm(forms.ModelForm):
 class FollowUsersForm(forms.Form):
     user_to_follow = forms.CharField(
         max_length=20,
-        label="Utilisateur à suivre")
+        label="Utilisateur à suivre",
+        widget=forms.TextInput(attrs={"placeholder": "Nom d'utilisateur"})
+    )
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
