@@ -73,7 +73,8 @@ def flux(request):
         )
         | Q(user=request.user)
     ).exclude(Q(id__in=[review.ticket.id
-                        for review in reviews_not_autoreview]))
+                        for review in reviews_not_autoreview]) |
+              Q(review__user=request.user))
 
     tickets_and_reviews = sorted(
         chain(tickets, reviews),
