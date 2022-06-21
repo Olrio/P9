@@ -25,4 +25,4 @@ Hors démonstration, ce projet ne comporte aucune donnée.
 
 L'utilisateur/développeur qui installe les fichiers du présent projet doit donc exécuter les commandes suivantes pour initialiser la base de données :
 
-`python manage.py makemigrations`, puis `python manage.py migrate`.
+`python manage.py makemigrations`, puis `python manage.py migrate --run-syncdb`.
