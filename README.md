@@ -17,3 +17,12 @@ Y copier le fichier *.env* contenant la SECRET_KEY nécessaire au projet
 Lancer le serveur avec la commande `python manage.py runserver`
 
 Ouvrir le navigateur internet à l'adresse http://127.0.0.1:8000/login/
+
+
+# Remarque :
+
+Hors démonstration, ce projet ne comporte aucune donnée.
+
+L'utilisateur/développeur qui installe les fichiers du présent projet doit donc exécuter les commandes suivantes pour initialiser la base de données :
+
+`python manage.py makemigrations`, puis `python manage.py migrate`.
