@@ -21,8 +21,8 @@ Ouvrir le navigateur internet à l'adresse http://127.0.0.1:8000/login/
 
 # Remarque :
 
-Hors démonstration, ce projet ne comporte aucune donnée.
+Hors démonstration, ce projet ne comporte aucune donnée (pas de migration, ni table SQLite)
 
-L'utilisateur/développeur qui installe les fichiers du présent projet doit donc exécuter les commandes suivantes pour initialiser la base de données :
+L'utilisateur/développeur qui installe les fichiers du présent projet doit donc exécuter la commande suivante pour initialiser la base de données :
 
-`python manage.py makemigrations`, puis `python manage.py migrate --run-syncdb`.
+`python manage.py migrate --run-syncdb`.
