@@ -18,6 +18,11 @@ Lancer le serveur avec la commande `python manage.py runserver`
 
 Ouvrir le navigateur internet à l'adresse http://127.0.0.1:8000/login/
 
+# Conformité à la PEP8
+
+La conformité des scripts du projet à la PEP8 peut être vérifiée en utilisant le wrapper flake8.<br/>
+Pour ce faire, se placer à la racine du projet (P9) et lancer la commande `flake8 litreview/`
+
 
 # Remarque :
 
